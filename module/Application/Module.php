@@ -19,6 +19,23 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $this->bootstrap();
+    }
+
+    function bootstrap()
+    {
+        define( 'ELITE_CONFIG_DEFAULT', dirname(__FILE__).'/config.default.ini' );
+        define( 'ELITE_CONFIG', dirname(__FILE__).'/config.ini' );
+        define( 'ELITE_PATH', '.' );
+
+        \VF_Singleton::getInstance()->setProcessURL('/modules/vaf/process.php?');
+        $database = new \VF_TestDbAdapter(array(
+            'dbname' => 'prestashop',
+            'username' => 'prestashop',
+            'password' => 'prestashop'
+        ));
+        \VF_Singleton::getInstance()->setReadAdapter($database);
     }
 
     public function getConfig()
@@ -36,4 +53,5 @@ class Module
             ),
         );
     }
+
 }
