@@ -33,6 +33,17 @@ return array(
                 ),
             ),
 
+            'import' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/import',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Import',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+
         ),
     ),
     'service_manager' => array(
@@ -57,7 +68,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Dashboard' => 'Application\Controller\DashboardController',
-            'Application\Controller\Schema' => 'Application\Controller\SchemaController'
+            'Application\Controller\Schema' => 'Application\Controller\SchemaController',
+            'Application\Controller\Import' => 'Application\Controller\ImportController'
         ),
     ),
     'view_manager' => array(
