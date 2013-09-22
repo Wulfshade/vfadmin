@@ -14,8 +14,35 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+    function bootstrap()
+    {
+        define( 'ELITE_CONFIG_DEFAULT', dirname(__FILE__).'/config.default.ini' );
+        define( 'ELITE_CONFIG', dirname(__FILE__).'/config.ini' );
+        define( 'ELITE_PATH', '.' );
+
+        \VF_Singleton::getInstance()->setProcessURL('/modules/vaf/process.php?');
+        $database = new \VF_TestDbAdapter(array(
+            'dbname' => 'prestashop',
+            'username' => 'prestashop',
+            'password' => 'prestashop'
+        ));
+        \VF_Singleton::getInstance()->setReadAdapter($database);
+    }
+
     public function indexAction()
     {
-        return new ViewModel();
+        $this->bootstrap();
+
+        $schema = new \VF_Schema;
+
+        if($this->getRequest()->isPost()) {
+            $schemaGenerator = new \VF_Schema_Generator();
+            $schemaGenerator->dropExistingTables();
+            $schemaGenerator->execute(explode(",", $_POST['schema']));
+        }
+
+        return array(
+            'schema' => $schema->getLevels()
+        );
     }
 }
