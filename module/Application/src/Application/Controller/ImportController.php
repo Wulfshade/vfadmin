@@ -20,8 +20,12 @@ class ImportController extends AbstractActionController
 
         if($this->getRequest()->isPost()) {
 
-            $tmpFile = sys_get_temp_dir() . '/' . sha1(uniqid());
-            file_put_contents($tmpFile, $_POST['text']);
+            if($_FILES['file']['tmp_name']) {
+                $tmpFile = $_FILES['file']['tmp_name'];
+            } else {
+                $tmpFile = sys_get_temp_dir() . '/' . sha1(uniqid());
+                file_put_contents($tmpFile, $_POST['text']);
+            }
 
             $importer = new \VF_Import_ProductFitments_CSV_Import($tmpFile);
             $importer

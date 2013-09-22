@@ -1,5 +1,14 @@
 <form action="?" method="post" enctype="multipart/form-data">
+    Import Text:
     <textarea name="text">sku,<?=implode(",", $schema)?>
 </textarea>
+
+    <br />
+    - or -
+    <br />
+    Import File:
+    <input type="file" name="file" />
+
+    <br />
     <input class="btn btn-primary" type="submit" name="import" value="Import" />
 </form>
