@@ -39,6 +39,10 @@ class IndexController extends AbstractActionController
             $schemaGenerator = new \VF_Schema_Generator();
             $schemaGenerator->dropExistingTables();
             $schemaGenerator->execute(explode(",", $_POST['schema']));
+
+            $this->flashMessenger()
+                ->setNamespace('success')
+                ->addMessage('Saved Schema');
         }
 
         return array(
