@@ -11,8 +11,10 @@
         <tr>
         <?php
         foreach($schema->getLevels() as $level) {
-            echo '<th><input type="text" name="'.$this->escapeHTMLAttr($level).'" value="'.$this->escapeHTMLAttr(isset($_GET[$level]) ? $_GET[$level] : '').'" />';
-            echo '<input type="submit" value="Filter" /></th>';
+            echo '<th>';
+            echo '<input type="text" name="'.$this->escapeHTMLAttr($level).'" value="'.$this->escapeHTMLAttr(isset($_GET[$level]) ? $_GET[$level] : '').'" />';
+            echo '<input type="submit" value="Filter" />';
+            echo '</th>';
         }
         ?>
         </tr>
@@ -22,8 +24,8 @@
             ?>
             <tr>
                 <?php
-                foreach($vehicle->toTitleArray() as $title) {
-                    echo '<td>'.$title.'</td>';
+                foreach($vehicle->toTitleArray() as $level=>$title) {
+                    echo '<td><a href="?'.$level.'='.$this->escapeHTMLAttr($title).'">'.$this->escapeHTML($title).'</a></td>';
                 }
                 ?>
             </tr>
