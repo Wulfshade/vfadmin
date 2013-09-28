@@ -17,11 +17,32 @@ class VehiclesController extends AbstractActionController
     public function indexAction()
     {
         $filter = $this->filter();
-        $vehicles = $this->finder()->findByLevels($filter);
+
+        $page = $this->params()->fromQuery('page',1);
+        $perpage = 10;
+        $offset = ($page * $perpage)-$perpage;
+
+        $vehicles = $this->finder()->findByLevels($filter, false, $perpage, $offset);
+        $vehicleCount = count($this->finder()->findByLevels($filter));
+
+        $pageAdapter = new \Zend\Paginator\Adapter\Null($vehicleCount);
+        $paginator = new \Zend\Paginator\Paginator($pageAdapter);
+        $paginator->setItemCountPerPage($perpage);
+        $paginator->setCurrentPageNumber($page);
+
+        if($offset+$perpage > $vehicleCount) {
+            $end = $vehicleCount;
+        } else {
+            $end = $offset+$perpage;
+        }
 
         return array(
             'vehicles' => $vehicles,
             'schema' => $this->schema(),
+            'start'=>$offset+1,
+            'end'=>$end,
+            'total'=>$vehicleCount,
+            'paginator'=>$paginator,
         );
     }
 
