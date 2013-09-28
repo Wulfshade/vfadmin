@@ -22,7 +22,7 @@ return array(
                 ),
             ),
 
-            'schema' => array(
+            'settings' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/schema',
@@ -33,7 +33,7 @@ return array(
                 ),
             ),
 
-            'import' => array(
+            'product-fitments' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/import',
