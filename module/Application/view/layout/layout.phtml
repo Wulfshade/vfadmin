@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('Vehicle Fits '. $this->translate('Admin Panel'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
@@ -19,27 +19,26 @@
 
     </head>
     <body>
+
+
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
 
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li><a href="<?php echo $this->url('dashboard') ?>"><?php echo $this->translate('Dashboard') ?></a></li>
-                            <li><a href="<?php echo $this->url('vehicles') ?>"><?php echo $this->translate('Vehicles') ?></a></li>
-                            <li><a href="<?php echo $this->url('product-fitments') ?>"><?php echo $this->translate('Product Fitments') ?></a></li>
-                            <li><a href="<?php echo $this->url('settings') ?>"><?php echo $this->translate('Settings') ?></a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
+                <img src="<?php echo $this->basePath()?>/img/small_logo.png" class="brand" />
+                <ul class="nav">
+                    <li><a href="<?php echo $this->url('dashboard') ?>"><?php echo $this->translate('Dashboard') ?></a></li>
+                    <li><a href="<?php echo $this->url('vehicles') ?>"><?php echo $this->translate('Vehicles') ?></a></li>
+                    <li><a href="<?php echo $this->url('product-fitments') ?>"><?php echo $this->translate('Product Fitments') ?></a></li>
+                    <li><a href="<?php echo $this->url('settings') ?>"><?php echo $this->translate('Settings') ?></a></li>
+                </ul>
                 </div>
+
             </div>
         </div>
+
         <div class="container">
+
             <?=$this->partial('layout/messages.phtml')?>
             <div class="row">
                 <div class="span2">
