@@ -1,0 +1,22 @@
+<table class="table table-bordered table-striped">
+    <tr>
+    <?php
+    foreach($schema->getLevels() as $level) {
+        echo '<th>'.$level.'</th>';
+    }
+    ?>
+    </tr>
+    <?php
+    foreach($vehicles as $vehicle) {
+        ?>
+        <tr>
+            <?php
+            foreach($vehicle->toTitleArray() as $title) {
+                echo '<td>'.$title.'</td>';
+            }
+            ?>
+        </tr>
+        <?php
+    }
+    ?>
+</table>

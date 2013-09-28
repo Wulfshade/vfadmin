@@ -22,6 +22,17 @@ return array(
                 ),
             ),
 
+            'vehicles' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/vehicles',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Vehicles',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+
             'settings' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -68,6 +79,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Dashboard' => 'Application\Controller\DashboardController',
+            'Application\Controller\Vehicles' => 'Application\Controller\VehiclesController',
             'Application\Controller\Schema' => 'Application\Controller\SchemaController',
             'Application\Controller\Import' => 'Application\Controller\ImportController'
         ),
