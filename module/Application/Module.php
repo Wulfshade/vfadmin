@@ -28,7 +28,7 @@ class Module
         $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
         $controller->layout()->controller = $controllerClass;
         $controller->layout()->module = $moduleNamespace;
-//        $controller->layout()->route = $e->get
+        $controller->layout()->route =  $route = $e->getRouteMatch()->getMatchedRouteName();
     }
 
     function bootstrap()
