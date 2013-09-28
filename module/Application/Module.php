@@ -17,7 +17,7 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $app = $e->getApplication();
-        $app->getEventManager()->attach('dispatch',array($this, 'setLayout'));
+        $app->getEventManager()->attach('dispatch', array($this, 'setLayout'));
         $this->bootstrap();
     }
 

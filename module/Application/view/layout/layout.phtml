@@ -45,11 +45,9 @@
             <div class="row-fluid">
                 <div class="span2">
                     <?php
-                    echo $module;
-                    echo $controller;
-                    switch($controller) {
-                        case 'Application\Controller\ImportController':
-                            echo $this->partial('layout/menu/import.phtml');
+                    switch($module) {
+                        case 'Fitments':
+                            echo $this->partial('layout/menu/fitments.phtml');
                         break;
                     }
                     ?>
