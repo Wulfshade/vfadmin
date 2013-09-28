@@ -7,6 +7,6 @@
         "php": ">=5.3.3",
         "zendframework/zendframework": ">2.2.0rc1",
         "zendframework/zendframework1": "*",
-        "vehiclefits/vehicle-fits-core": "*"
+        "vehiclefits/vehicle-fits-core": "dev-master"
     }
 }
