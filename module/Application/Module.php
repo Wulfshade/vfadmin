@@ -16,11 +16,18 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-
+        $app = $e->getApplication();
+        $app->getEventManager()->attach('dispatch',array($this, 'setLayout'));
         $this->bootstrap();
+    }
+
+    function setLayout($e)
+    {
+        $controller = $e->getTarget();
+        $controllerClass = get_class($controller);
+        $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+        $controller->layout()->controller = $controllerClass;
+        $controller->layout()->module = $moduleNamespace;
     }
 
     function bootstrap()
