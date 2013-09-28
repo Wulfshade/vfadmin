@@ -16,13 +16,36 @@ class VehiclesController extends AbstractActionController
 {
     public function indexAction()
     {
-        $schema = new \VF_Schema;
-
-        $finder = new \VF_Vehicle_Finder($schema);
+        $filter = $this->filter();
+        $vehicles = $this->finder()->findByLevels($filter);
 
         return array(
-            'vehicles' => $finder->findByLevels(array()),
-            'schema' => $schema,
+            'vehicles' => $vehicles,
+            'schema' => $this->schema(),
         );
+    }
+
+    function finder()
+    {
+        $finder = new \VF_Vehicle_Finder($this->schema());
+        return $finder;
+    }
+
+    function filter()
+    {
+        $filter = array();
+        foreach($this->schema()->getLevels() as $level) {
+            $value = $this->params()->fromQuery($level);
+            if($value) {
+                $filter[$level] = $value;
+            }
+        }
+        return $filter;
+    }
+
+    function schema()
+    {
+        $schema = new \VF_Schema;
+        return $schema;
     }
 }
