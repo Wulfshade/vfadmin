@@ -22,28 +22,6 @@ return array(
                 ),
             ),
 
-            'vehicles' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/vehicles',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Vehicles',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-
-            'settings' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/schema',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Schema',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-
         ),
     ),
     'service_manager' => array(
