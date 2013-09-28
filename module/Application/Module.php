@@ -37,7 +37,21 @@ class Module
                     'username' => _DB_USER_,
                     'password' => _DB_PASSWD_
                 ));
-                break;
+            break;
+            case 'magento':
+                $config = new \Zend_Config_Xml($this->shoppingCartRoot() . 'app/etc/local.xml');
+                $dbConfig = $config->toArray();
+
+                $dbinfo = $dbConfig['global']['resources']['default_setup']['connection'];
+                $database = new \VF_TestDbAdapter(array(
+                    'dbname' => $dbinfo['dbname'],
+                    'username' => $dbinfo['username'],
+                    'password' => $dbinfo['password']
+                ));
+            break;
+            default:
+                throw new \Exception('Unable to detect shopping cart');
+            break;
         }
 
         \VF_Singleton::getInstance()->setProcessURL('/modules/vaf/process.php?');
@@ -74,13 +88,21 @@ class Module
         if(preg_match('/PrestaShop/', $indexCode)) {
             return 'prestashop';
         }
+        if(preg_match('/magento/', $indexCode)) {
+            return 'magento';
+        }
     }
 
     // this returns the "simulated" (unresolved) path if run through a symlink
     public function shoppingCartRoot()
     {
-        $script = $_SERVER["SCRIPT_FILENAME"];
-        return str_replace('vfadmin/public', '', dirname($script));
+        $script = dirname($_SERVER["SCRIPT_FILENAME"]);
+        if(preg_match('/vfadmin\/public/', $script)) {
+            return str_replace('vfadmin/public', '', $script);
+        }
+        if(preg_match('/vfadmin/', $script)) {
+            return str_replace('vfadmin', '', $script);
+        }
     }
 
 }
