@@ -9,7 +9,6 @@
 
         <!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
                         ->prependStylesheet($this->basePath() . '/css/style.css')
                         ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
 
@@ -42,7 +41,7 @@
         </div>
         <div class="container">
             <?=$this->partial('layout/messages.phtml')?>
-            <div class="row-fluid">
+            <div class="row">
                 <div class="span2">
                     <?php
                     switch($module) {
