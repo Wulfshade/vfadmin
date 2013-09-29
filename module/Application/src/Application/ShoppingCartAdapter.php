@@ -1,7 +1,7 @@
 <?php
 namespace Application;
 
-class ShoppingCartEnvironment
+class ShoppingCartAdapter
 {
     function databaseDetails()
     {

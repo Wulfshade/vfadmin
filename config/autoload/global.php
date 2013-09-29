@@ -15,7 +15,7 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'database' => function ($serviceManager) {
-                $shoppingCartEnvironment = $serviceManager->get('shoppingcart_environment');
+                $shoppingCartEnvironment = $serviceManager->get('shopping_cart_adapter');
                 $dbinfo = $shoppingCartEnvironment->databaseDetails();
                 $database = new \VF_TestDbAdapter(array(
                     'dbname' => $dbinfo['dbname'],
@@ -24,8 +24,8 @@ return array(
                 ));
                 return $database;
             },
-            'shoppingcart_environment' => function($serviceManager) {
-                $shoppingCartEnvironment = new \Application\ShoppingCartEnvironment();
+            'shopping_cart_adapter' => function($serviceManager) {
+                $shoppingCartEnvironment = new \Application\ShoppingCartAdapter();
                 return new $shoppingCartEnvironment;
             }
         )

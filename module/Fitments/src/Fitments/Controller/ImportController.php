@@ -56,6 +56,6 @@ class ImportController extends AbstractController
     /** @return ShoppingCartEnvironment */
     function shoppingCartEnvironment()
     {
-        return $this->getServiceLocator()->get('shoppingcart_environment');
+        return $this->getServiceLocator()->get('shopping_cart_adapter');
     }
 }
