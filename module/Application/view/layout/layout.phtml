@@ -1,4 +1,12 @@
-<?php echo $this->doctype(); ?>
+<?php
+if(!isset($route)) {
+    $route = null;
+}
+if(!isset($module)) {
+    $module = null;
+}
+echo $this->doctype();
+?>
 
 <html lang="en">
     <head>
@@ -43,13 +51,13 @@
                     <?php
                     switch($module) {
                         case 'Fitments':
-                            echo $this->partial('layout/menu/fitments.phtml');
+                            echo $this->partial('layout/menu/fitments.phtml', array('route'=>$route));
                         break;
                         case 'Vehicles':
-                            echo $this->partial('layout/menu/vehicles.phtml');
+                            echo $this->partial('layout/menu/vehicles.phtml', array('route'=>$route));
                         break;
                         case 'Settings':
-                            echo $this->partial('layout/menu/settings.phtml');
+                            echo $this->partial('layout/menu/settings.phtml', array('route'=>$route));
                         break;
                     }
                     ?>

@@ -22,12 +22,24 @@ return array(
                 ),
             ),
 
+            'vehicles-import' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/vehicles-import',
+                    'defaults' => array(
+                        'controller' => 'Vehicles\Controller\Import',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+
         ),
     ),
 
     'controllers' => array(
         'invokables' => array(
-            'Vehicles\Controller\Vehicles' => 'Vehicles\Controller\VehiclesController'
+            'Vehicles\Controller\Vehicles' => 'Vehicles\Controller\VehiclesController',
+            'Vehicles\Controller\Import' => 'Vehicles\Controller\ImportController'
         ),
     ),
     'view_manager' => array(
