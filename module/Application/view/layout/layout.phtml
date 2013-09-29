@@ -48,19 +48,21 @@ echo $this->doctype();
             <?=$this->partial('layout/messages.phtml')?>
             <div class="row">
                 <div class="span2">
-                    <?php
-                    switch($module) {
-                        case 'Fitments':
-                            echo $this->partial('layout/menu/fitments.phtml', array('route'=>$route));
-                        break;
-                        case 'Vehicles':
-                            echo $this->partial('layout/menu/vehicles.phtml', array('route'=>$route));
-                        break;
-                        case 'Settings':
-                            echo $this->partial('layout/menu/settings.phtml', array('route'=>$route));
-                        break;
-                    }
-                    ?>
+                    <div class="well well-small">
+                        <?php
+                        switch($module) {
+                            case 'Fitments':
+                                echo $this->partial('layout/menu/fitments.phtml', array('route'=>$route));
+                            break;
+                            case 'Vehicles':
+                                echo $this->partial('layout/menu/vehicles.phtml', array('route'=>$route));
+                            break;
+                            case 'Settings':
+                                echo $this->partial('layout/menu/settings.phtml', array('route'=>$route));
+                            break;
+                        }
+                        ?>
+                    </div>
                 </div>
                 <div class="span10">
                     <?php echo $this->content; ?>
