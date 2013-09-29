@@ -20,9 +20,7 @@ class ImportController extends AbstractController
         if($this->getRequest()->isPost()) {
 
             if($_FILES['file']['error']) {
-                $this->flashMessenger()
-                    ->setNamespace('error')
-                    ->addMessage($this->uploadErrorCodeToMessage($_FILES['file']['error']));
+                $this->flashFileUploadErrorMessage();
             } else {
 
                 if($_FILES['file']['tmp_name']) {

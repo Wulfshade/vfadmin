@@ -5,6 +5,13 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class AbstractController extends AbstractActionController
 {
+    function flashFileUploadErrorMessage()
+    {
+        $this->flashMessenger()
+            ->setNamespace('error')
+            ->addMessage($this->uploadErrorCodeToMessage($_FILES['file']['error']));
+    }
+
     function uploadErrorCodeToMessage($code)
     {
         switch ($code) {
