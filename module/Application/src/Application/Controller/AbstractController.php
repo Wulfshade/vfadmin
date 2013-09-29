@@ -5,6 +5,16 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class AbstractController extends AbstractActionController
 {
+    function attemptedFileUpload()
+    {
+        return (bool)$_FILES['file']['name'];
+    }
+
+    function fileUploadHasError()
+    {
+        return (bool)$_FILES['file']['error'];
+    }
+
     function flashFileUploadErrorMessage()
     {
         $this->flashMessenger()

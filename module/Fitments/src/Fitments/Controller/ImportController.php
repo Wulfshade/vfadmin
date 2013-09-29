@@ -19,7 +19,7 @@ class ImportController extends AbstractController
 
         if($this->getRequest()->isPost()) {
 
-            if($_FILES['file']['error']) {
+            if($this->attemptedFileUpload() && $this->fileUploadHasError()) {
                 $this->flashFileUploadErrorMessage();
             } else {
 
