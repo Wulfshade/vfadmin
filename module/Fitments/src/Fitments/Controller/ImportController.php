@@ -14,7 +14,7 @@ use Zend\View\Model\ViewModel;
 
 class ImportController extends AbstractActionController
 {
-    public function indexAction()
+    function indexAction()
     {
         $schema = new \VF_Schema;
 
