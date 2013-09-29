@@ -10,70 +10,26 @@ echo $this->doctype();
 
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('Vehicle Fits '. $this->translate('Admin Panel'))->setSeparator(' - ')->setAutoEscape(false) ?>
-
-        <!-- styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
-
-        <!-- Scripts -->
-        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js') ?>
-
+        <?=$this->partial('layout/head.phtml')?>
     </head>
     <body>
-
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-
-                <img src="<?php echo $this->basePath()?>/img/small_logo.png" class="brand" />
-                <ul class="nav">
-                    <li <?=$route == 'dashboard' ? 'class="active"' : ''?>><a href="<?php echo $this->url('dashboard') ?>"><?php echo $this->translate('Dashboard') ?></a></li>
-                    <li <?=$module == 'Vehicles' ? 'class="active"' : ''?>><a href="<?php echo $this->url('vehicles') ?>"><?php echo $this->translate('Vehicles') ?></a></li>
-                    <li <?=$module == 'Fitments' ? 'class="active"' : ''?>><a href="<?php echo $this->url('fitments') ?>"><?php echo $this->translate('Product Fitments') ?></a></li>
-                    <li <?=$module == 'Settings' ? 'class="active"' : ''?>><a href="<?php echo $this->url('settings') ?>"><?php echo $this->translate('Settings') ?></a></li>
-                </ul>
-                </div>
-
-            </div>
-        </div>
+        <?=$this->partial('layout/navbar.phtml')?>
 
         <div class="container">
 
             <?=$this->partial('layout/messages.phtml')?>
             <div class="row">
                 <div class="span2">
-                    <div class="well well-small">
-                        <?php
-                        switch($module) {
-                            case 'Fitments':
-                                echo $this->partial('layout/menu/fitments.phtml', array('route'=>$route));
-                            break;
-                            case 'Vehicles':
-                                echo $this->partial('layout/menu/vehicles.phtml', array('route'=>$route));
-                            break;
-                            case 'Settings':
-                                echo $this->partial('layout/menu/settings.phtml', array('route'=>$route));
-                            break;
-                        }
-                        ?>
-                    </div>
+                    <?=$this->partial('layout/sidebar.phtml')?>
                 </div>
                 <div class="span10">
                     <?php echo $this->content; ?>
                 </div>
             </div>
 
-            <hr>
-            <footer>
-                <p>&copy; 2013 VehicleFits</p>
-            </footer>
-        </div> <!-- /container -->
+            <?=$this->partial('layout/footer.phtml')?>
+        </div>
+
         <?php echo $this->inlineScript() ?>
     </body>
 </html>
