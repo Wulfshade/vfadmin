@@ -30,11 +30,14 @@ class ImportController extends AbstractController
                     file_put_contents($tmpFile, $_POST['text']);
                 }
 
+                $shoppingCartEnvironment = $this->shoppingCartEnvironment();
+                $dbInfo = $shoppingCartEnvironment->databaseDetails();
+
                 $importer = new \VF_Import_ProductFitments_CSV_Import($tmpFile);
                 $importer
-                    ->setProductTable('catalog_product_entity')
-                    ->setProductSkuField('sku')
-                    ->setProductIdField('entity_id');
+                    ->setProductTable($dbInfo['product_table'])
+                    ->setProductSkuField($dbInfo['product_sku_field'])
+                    ->setProductIdField($dbInfo['product_id_field']);
 
                 //$importer->setLog($log);
                 $importer->import();
@@ -48,5 +51,11 @@ class ImportController extends AbstractController
         return array(
             'schema' => $schema->getLevels()
         );
+    }
+
+    /** @return ShoppingCartEnvironment */
+    function shoppingCartEnvironment()
+    {
+        return $this->getServiceLocator()->get('shoppingcart_environment');
     }
 }

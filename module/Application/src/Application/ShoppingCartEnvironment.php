@@ -11,12 +11,20 @@ class ShoppingCartEnvironment
                 return array(
                     'dbname' => _DB_NAME_,
                     'username' => _DB_USER_,
-                    'password' => _DB_PASSWD_
+                    'password' => _DB_PASSWD_,
+                    'product_table' => 'ps_product',
+                    'product_sku_field' => 'reference',
+                    'product_id_field' => 'id_product',
                 );
             case 'magento':
                 $config = new \Zend_Config_Xml($this->shoppingCartRoot() . 'app/etc/local.xml');
                 $dbConfig = $config->toArray();
                 $dbinfo = $dbConfig['global']['resources']['default_setup']['connection'];
+                $dbinfo = $dbinfo + array(
+                        'product_table' => 'catalog_product_entity',
+                        'product_sku_field' => 'sku',
+                        'product_id_field' => 'entity_id',
+                    );
                 return $dbinfo;
             default:
                 throw new \Exception('Unable to detect shopping cart');
