@@ -5,7 +5,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class AbstractController extends AbstractActionController
 {
-    function codeToMessage($code)
+    function uploadErrorCodeToMessage($code)
     {
         switch ($code) {
             case UPLOAD_ERR_INI_SIZE:

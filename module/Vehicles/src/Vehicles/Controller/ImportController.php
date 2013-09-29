@@ -22,7 +22,7 @@ class ImportController extends AbstractController
             if($_FILES['file']['error']) {
                 $this->flashMessenger()
                     ->setNamespace('error')
-                    ->addMessage($this->codeToMessage($_FILES['file']['error']));
+                    ->addMessage($this->uploadErrorCodeToMessage($_FILES['file']['error']));
             } else {
 
                 if($_FILES['file']['tmp_name']) {
