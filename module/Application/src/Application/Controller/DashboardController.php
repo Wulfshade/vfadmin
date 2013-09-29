@@ -9,13 +9,19 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-
-class DashboardController extends AbstractActionController
+class DashboardController extends AbstractController
 {
     public function indexAction()
     {
         $this->layout('layout/layout-dashboard.phtml');
+
+        $schema = new \VF_Schema;
+        $vehicleCount = $this->finder()->countAll();
+
+        return array(
+            'schema' => $schema->getLevels(),
+            'vehicleCount' => $vehicleCount,
+            'shoppingCartName' => $this->shoppingCartEnvironment()->whichShoppingCart(),
+        );
     }
 }

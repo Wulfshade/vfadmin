@@ -54,9 +54,21 @@ class AbstractController extends AbstractActionController
         return $message;
     }
 
-    /** @return ShoppingCartEnvironment */
+    /** @return ShoppingCartAdapter */
     function shoppingCartEnvironment()
     {
         return $this->getServiceLocator()->get('shopping_cart_adapter');
+    }
+
+    function finder()
+    {
+        $finder = new \VF_Vehicle_Finder($this->schema());
+        return $finder;
+    }
+
+    function schema()
+    {
+        $schema = new \VF_Schema;
+        return $schema;
     }
 }

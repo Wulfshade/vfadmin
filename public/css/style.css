@@ -40,3 +40,9 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+.dashboard-cell {
+    border:1px black solid;
+    padding:10px;
+    border-radius: 5px;
+}

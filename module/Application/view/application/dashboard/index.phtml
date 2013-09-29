@@ -1,1 +1,26 @@
-Dashboard
+<div class="row">
+    <div class="span6">
+        <dl class="dashboard-cell">
+            <dt>Current Schema</dt>
+            <dd><?=$this->escapeHTML(implode(', ', $this->schema))?></dd>
+        </dl>
+    </div>
+    <div class="span6">
+        <dl class="dashboard-cell">
+            <dt>Vehicles In System</dt>
+            <dd><?=number_format($vehicleCount)?></dd>
+        </dl>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span6">
+        <dl class="dashboard-cell">
+            <dt>Shopping Cart Environment</dt>
+            <dd><?=$this->escapeHTML($shoppingCartName)?></dd>
+        </dl>
+    </div>
+    <div class="span6">
+        
+    </div>
+</div>

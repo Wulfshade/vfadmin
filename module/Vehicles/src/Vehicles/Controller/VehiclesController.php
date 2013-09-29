@@ -9,10 +9,9 @@
 
 namespace Vehicles\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Application\Controller\AbstractController;
 
-class VehiclesController extends AbstractActionController
+class VehiclesController extends AbstractController
 {
     public function indexAction()
     {
@@ -46,12 +45,6 @@ class VehiclesController extends AbstractActionController
         );
     }
 
-    function finder()
-    {
-        $finder = new \VF_Vehicle_Finder($this->schema());
-        return $finder;
-    }
-
     function filter()
     {
         $filter = array();
@@ -62,11 +55,5 @@ class VehiclesController extends AbstractActionController
             }
         }
         return $filter;
-    }
-
-    function schema()
-    {
-        $schema = new \VF_Schema;
-        return $schema;
     }
 }
