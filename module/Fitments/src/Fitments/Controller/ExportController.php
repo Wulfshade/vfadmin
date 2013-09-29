@@ -24,7 +24,9 @@ class ExportController extends AbstractController
             $dbInfo = $shoppingCartEnvironment->databaseDetails();
 
             $exporter
-                ->setProductTable($dbInfo['product_table']);
+                ->setProductTable($dbInfo['product_table'])
+                ->setProductSkuField($dbInfo['product_sku_field'])
+                ->setProductIdField($dbInfo['product_id_field']);
 
             header(sprintf('Content-Disposition: attachment;filename="vaf-export-%s.csv"', time()));
             header('Content-Type: text/csv');
