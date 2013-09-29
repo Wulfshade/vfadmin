@@ -3,33 +3,24 @@ namespace Application;
 
 class ShoppingCartEnvironment
 {
-    function database()
+    function databaseDetails()
     {
         switch($this->whichShoppingCart()) {
             case 'prestashop':
                 require_once $this->shoppingCartRoot().'/config/settings.inc.php';
-                $database = new \VF_TestDbAdapter(array(
+                return array(
                     'dbname' => _DB_NAME_,
                     'username' => _DB_USER_,
                     'password' => _DB_PASSWD_
-                ));
-                break;
+                );
             case 'magento':
                 $config = new \Zend_Config_Xml($this->shoppingCartRoot() . 'app/etc/local.xml');
                 $dbConfig = $config->toArray();
-
                 $dbinfo = $dbConfig['global']['resources']['default_setup']['connection'];
-                $database = new \VF_TestDbAdapter(array(
-                    'dbname' => $dbinfo['dbname'],
-                    'username' => $dbinfo['username'],
-                    'password' => $dbinfo['password']
-                ));
-                break;
+                return $dbinfo;
             default:
                 throw new \Exception('Unable to detect shopping cart');
-                break;
         }
-        return $database;
     }
 
     /**

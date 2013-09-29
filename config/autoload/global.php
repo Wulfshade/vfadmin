@@ -12,5 +12,18 @@
  */
 
 return array(
-    // ...
+    'service_manager' => array(
+        'factories' => array(
+            'database' => function ($serviceManager) {
+                $shoppingCartEnvironment = new \Application\ShoppingCartEnvironment();
+                $dbinfo = $shoppingCartEnvironment->databaseDetails();
+                $database = new \VF_TestDbAdapter(array(
+                    'dbname' => $dbinfo['dbname'],
+                    'username' => $dbinfo['username'],
+                    'password' => $dbinfo['password']
+                ));
+                return $database;
+            },
+        )
+    )
 );

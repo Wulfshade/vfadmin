@@ -11,6 +11,7 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
 class Module
 {
@@ -18,7 +19,7 @@ class Module
     {
         $app = $e->getApplication();
         $app->getEventManager()->attach('dispatch', array($this, 'setLayout'));
-        $this->bootstrap();
+        $this->bootstrap($app->getServiceManager());
     }
 
     function setLayout($e)
@@ -31,14 +32,14 @@ class Module
         $controller->layout()->route =  $route = $e->getRouteMatch()->getMatchedRouteName();
     }
 
-    function bootstrap()
+    function bootstrap($sm)
     {
         define( 'ELITE_CONFIG_DEFAULT', dirname(__FILE__).'/config.default.ini' );
         define( 'ELITE_CONFIG', dirname(__FILE__).'/config.ini' );
         define( 'ELITE_PATH', '.' );
 
-        $shoppingCartEnvironment = new ShoppingCartEnvironment();
-        $database = $shoppingCartEnvironment->database();
+        $database = $sm->get('database');
+
 
         \VF_Singleton::getInstance()->setProcessURL('/modules/vaf/process.php?');
         \VF_Singleton::getInstance()->setReadAdapter($database);

@@ -32,9 +32,9 @@ class ImportController extends AbstractController
 
                 $importer = new \VF_Import_ProductFitments_CSV_Import($tmpFile);
                 $importer
-                    ->setProductTable('ps_product')
-                    ->setProductSkuField('reference')
-                    ->setProductIdField('id_product');
+                    ->setProductTable('catalog_product_entity')
+                    ->setProductSkuField('sku')
+                    ->setProductIdField('entity_id');
 
                 //$importer->setLog($log);
                 $importer->import();
