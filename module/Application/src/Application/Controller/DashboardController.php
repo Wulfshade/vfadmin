@@ -16,5 +16,6 @@ class DashboardController extends AbstractActionController
 {
     public function indexAction()
     {
+        $this->layout('layout/layout-dashboard.phtml');
     }
 }
