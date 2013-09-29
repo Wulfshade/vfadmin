@@ -11,12 +11,34 @@ return array(
     'router' => array(
         'routes' => array(
 
-            'product-fitments' => array(
+            'fitments' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/import',
+                    'route'    => '/fitments-import',
                     'defaults' => array(
                         'controller' => 'Fitments\Controller\Import',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+
+            'fitments-import' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/fitments-import',
+                    'defaults' => array(
+                        'controller' => 'Fitments\Controller\Import',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+
+            'fitments-export' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/fitments-export',
+                    'defaults' => array(
+                        'controller' => 'Fitments\Controller\Export',
                         'action'     => 'index',
                     ),
                 ),
@@ -27,7 +49,8 @@ return array(
 
     'controllers' => array(
         'invokables' => array(
-            'Fitments\Controller\Import' => 'Fitments\Controller\ImportController'
+            'Fitments\Controller\Import' => 'Fitments\Controller\ImportController',
+            'Fitments\Controller\Export' => 'Fitments\Controller\ExportController',
         ),
     ),
     'view_manager' => array(
