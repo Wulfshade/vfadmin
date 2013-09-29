@@ -33,13 +33,25 @@ return array(
                 ),
             ),
 
+            'vehicles-export' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/vehicles-export',
+                    'defaults' => array(
+                        'controller' => 'Vehicles\Controller\Export',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+
         ),
     ),
 
     'controllers' => array(
         'invokables' => array(
             'Vehicles\Controller\Vehicles' => 'Vehicles\Controller\VehiclesController',
-            'Vehicles\Controller\Import' => 'Vehicles\Controller\ImportController'
+            'Vehicles\Controller\Import' => 'Vehicles\Controller\ImportController',
+            'Vehicles\Controller\Export' => 'Vehicles\Controller\ExportController',
         ),
     ),
     'view_manager' => array(
