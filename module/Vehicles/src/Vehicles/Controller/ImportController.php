@@ -31,17 +31,13 @@ class ImportController extends AbstractController
                 }
 
                 $importer = new \VF_Import_VehiclesList_CSV_Import($tmpFile);
-                $importer
-                    ->setProductTable('ps_product')
-                    ->setProductSkuField('reference')
-                    ->setProductIdField('id_product');
 
                 //$importer->setLog($log);
                 $importer->import();
 
                 $this->flashMessenger()
                     ->setNamespace('success')
-                    ->addMessage('Imported Fitments');
+                    ->addMessage('Imported Vehicles List');
             }
         }
 
