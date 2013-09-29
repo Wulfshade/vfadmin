@@ -52,10 +52,4 @@ class ImportController extends AbstractController
             'schema' => $schema->getLevels()
         );
     }
-
-    /** @return ShoppingCartEnvironment */
-    function shoppingCartEnvironment()
-    {
-        return $this->getServiceLocator()->get('shopping_cart_adapter');
-    }
 }

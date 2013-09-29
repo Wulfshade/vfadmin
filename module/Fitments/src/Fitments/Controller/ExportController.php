@@ -17,12 +17,17 @@ class ExportController extends AbstractController
     {
         if (isset($_GET['go']))
         {
-            header(sprintf('Content-Disposition: attachment;filename="vaf-export-%s.csv"', time()));
-            header('Content-Type: text/csv');
-
             $stream = fopen("php://output", 'w');
             $exporter = new \VF_Import_ProductFitments_CSV_Export();
-            $exporter->setProductTable('catalog_product_entity');
+
+            $shoppingCartEnvironment = $this->shoppingCartEnvironment();
+            $dbInfo = $shoppingCartEnvironment->databaseDetails();
+
+            $exporter
+                ->setProductTable($dbInfo['product_table']);
+
+            header(sprintf('Content-Disposition: attachment;filename="vaf-export-%s.csv"', time()));
+            header('Content-Type: text/csv');
             $exporter->export($stream);
 
             exit();
