@@ -22,6 +22,17 @@ return array(
                 ),
             ),
 
+            'vehicles-save' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/vehicleslist/save',
+                    'defaults' => array(
+                        'controller' => 'Vehicles\Controller\Vehicles',
+                        'action'     => 'save',
+                    ),
+                ),
+            ),
+
             'vehicles-import' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

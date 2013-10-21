@@ -56,4 +56,38 @@ class VehiclesController extends AbstractController
         }
         return $filter;
     }
+
+    function saveAction()
+    {
+        $dataToSave = $this->requestLevels();
+        $vehiclesFinder = new \VF_Vehicle_Finder(new \VF_Schema());
+        $vehicle = $vehiclesFinder->findOneByLevelIds($dataToSave, \VF_Vehicle_Finder::INCLUDE_PARTIALS);
+        if($vehicle){
+            $dataToSave = $vehicle->toTitleArray();
+        } else {
+            $dataToSave = array();
+        }
+
+        $dataToSave[$this->params()->fromQuery('entity')] = $this->params()->fromQuery('title');
+        $vehicle = \VF_Vehicle::create(new \VF_Schema(), $dataToSave);
+        $vehicle->save();
+
+        if (1||$this->getRequest()->isXmlHttpRequest()) {
+            echo $vehicle->getValue($this->params()->fromQuery('entity'));
+            exit();
+        }
+    }
+
+    function requestLevels()
+    {
+        $params = array();
+        foreach($this->schema()->getLevels() as $level)
+        {
+            if($this->params()->fromQuery($level))
+            {
+                $params[$level] = $this->params()->fromQuery($level);
+            }
+        }
+        return $params;
+    }
 }

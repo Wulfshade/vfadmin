@@ -14,9 +14,9 @@ return array(
             'fitments' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route'    => '/fitments-import',
+                    'route'    => '/fitments',
                     'defaults' => array(
-                        'controller' => 'Fitments\Controller\Import',
+                        'controller' => 'Fitments\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),
@@ -49,6 +49,7 @@ return array(
 
     'controllers' => array(
         'invokables' => array(
+            'Fitments\Controller\Index' => 'Fitments\Controller\IndexController',
             'Fitments\Controller\Import' => 'Fitments\Controller\ImportController',
             'Fitments\Controller\Export' => 'Fitments\Controller\ExportController',
         ),
