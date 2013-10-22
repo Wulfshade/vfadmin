@@ -54,7 +54,7 @@ class AbstractController extends AbstractActionController
         return $message;
     }
 
-    /** @return ShoppingCartAdapter */
+    /** @return \Application\ShoppingCartAdapter */
     function shoppingCartEnvironment()
     {
         return $this->getServiceLocator()->get('shopping_cart_adapter');
@@ -70,5 +70,11 @@ class AbstractController extends AbstractActionController
     {
         $schema = new \VF_Schema;
         return $schema;
+    }
+
+    /** @return \VF_TestDbAdapter */
+    function db()
+    {
+        return $this->getServiceLocator()->get('database');
     }
 }
