@@ -24,44 +24,73 @@ class LoginController extends AbstractController
         }
     }
 
+    /**
+     * Authenticate credentials against the correct shopping cart's password table
+     * @param $username_entered
+     * @param $password_entered
+     * @return bool
+     * @throws \Exception
+     */
     function isValid($username_entered, $password_entered)
     {
         $whichCart = $this->shoppingCartEnvironment()->whichShoppingCart();
         switch($whichCart) {
             case 'magento':
-                $password_string = $this->db()->select()
-                    ->from('admin_user', array('password'))
-                    ->where('username = ?', $username_entered)
-                    ->query()
-                    ->fetchColumn();
-                if(false === $password_string) {
-                    // no user found
-                    return false;
-                } else {
-                    $password_string = explode(':', $password_string);
-                    $hash = $password_string[0];
-                    $salt = $password_string[1];
-
-                    return md5($salt . $password_entered) === $hash;
-                }
-                break;
+                return $this->isValidMagento($username_entered, $password_entered);
             case 'prestashop':
-                require_once $this->shoppingCartEnvironment()->shoppingCartRoot() . '/config/settings.inc.php';
-                $salt = _COOKIE_KEY_;
-                $hash = md5($salt . $password_entered);
-                $result = $this->db()->select()
-                    ->from('ps_employee', array(new \Zend_Db_Expr('count(*)')))
-                    ->where('email = ?', $username_entered)
-                    ->where('passwd = ?', $hash)
-                    ->query()
-                    ->fetchColumn();
-                return (bool)$result;
+                return $this->isValidPrestashop($username_entered, $password_entered);
             break;
             default:
-                throw new Exception($whichCart);
-                break;
+                throw new \Exception($whichCart . ' is not recognized as a cart.');
         }
     }
 
+    /**
+     * Authenticate credentials against Magento's admin_user table
+     * @param $username_entered
+     * @param $password_entered
+     * @return bool
+     */
+    function isValidMagento($username_entered, $password_entered)
+    {
+        $password_string = $this->db()->select()
+            ->from('admin_user', array('password'))
+            ->where('username = ?', $username_entered)
+            ->query()
+            ->fetchColumn();
+        if(false === $password_string) {
+            // no user found
+            return false;
+        } else {
+            $password_string = explode(':', $password_string);
+            $hash = $password_string[0];
+            $salt = $password_string[1];
+
+            return md5($salt . $password_entered) === $hash;
+        }
+    }
+
+    /**
+     * Authenticate credentials against Prestashop's ps_employee table
+     * @param $username_entered
+     * @param $password_entered
+     * @return bool
+     */
+    function isValidPrestashop($username_entered, $password_entered)
+    {
+        // the salt used to hash the PW in the DB is stored in the settings file, its a constant.
+        require_once $this->shoppingCartEnvironment()->shoppingCartRoot() . '/config/settings.inc.php';
+        $salt = _COOKIE_KEY_;
+        // if the password is correct, it will be this:
+        $hash = md5($salt . $password_entered);
+        // check if that is the one stored
+        $result = $this->db()->select()
+            ->from('ps_employee', array(new \Zend_Db_Expr('count(*)')))
+            ->where('email = ?', $username_entered)
+            ->where('passwd = ?', $hash)
+            ->query()
+            ->fetchColumn();
+        return (bool)$result;
+    }
 
 }
