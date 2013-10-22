@@ -45,6 +45,18 @@ class LoginController extends AbstractController
                     return md5($salt . $password_entered) === $hash;
                 }
                 break;
+            case 'prestashop':
+                require_once $this->shoppingCartEnvironment()->shoppingCartRoot() . '/config/settings.inc.php';
+                $salt = _COOKIE_KEY_;
+                $hash = md5($salt . $password_entered);
+                $result = $this->db()->select()
+                    ->from('ps_employee', array(new \Zend_Db_Expr('count(*)')))
+                    ->where('email = ?', $username_entered)
+                    ->where('passwd = ?', $hash)
+                    ->query()
+                    ->fetchColumn();
+                return (bool)$result;
+            break;
             default:
                 throw new Exception($whichCart);
                 break;
