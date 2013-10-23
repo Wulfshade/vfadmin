@@ -44,6 +44,28 @@ return array(
                 ),
             ),
 
+            'js' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/vfjs',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Js',
+                        'action'     => 'js',
+                    ),
+                ),
+            ),
+
+            'process' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/vfprocess',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Js',
+                        'action'     => 'process',
+                    ),
+                ),
+            ),
+
 
 
         ),
@@ -73,6 +95,7 @@ return array(
             'Application\Controller\Vehicles' => 'Application\Controller\VehiclesController',
             'Application\Controller\Schema' => 'Application\Controller\SchemaController',
             'Application\Controller\Login' => 'Application\Controller\LoginController',
+            'Application\Controller\Js' => 'Application\Controller\JsController',
         ),
     ),
     'view_manager' => array(

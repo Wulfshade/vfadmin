@@ -40,7 +40,6 @@ class Module
 
         $database = $sm->get('database');
 
-        \VF_Singleton::getInstance()->setProcessURL('/modules/vaf/process.php?');
         \VF_Singleton::getInstance()->setReadAdapter($database);
     }
 

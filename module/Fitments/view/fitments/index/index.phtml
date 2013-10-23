@@ -28,7 +28,7 @@
             </div>
             <?php
             $metaData = '{';
-                $metaData .= "'ajaxUrl':'/admin/vafajax/process',";
+                $metaData .= "'ajaxUrl':'" . $this->url('process') . "',";
                 $metaData .= "'quickAddUrl':'" . $this->basePath() . "/vehicleslist/save',";
                 $metaData .= "'elementName':'vaf',";
                 $metaData .= "'schema':'1',";
@@ -119,8 +119,8 @@
 <script type="text/javascript" language="javascript">
  jQuery.noConflict();
 </script>
-<script src="/vaf/ajax/js?unavailableSelections=" type="text/javascript" language="javascript"></script>
-<script src="/skin/adminhtml/default/default/vf/multiTree.js" type="text/javascript" language="javascript"></script>
+<script src="<?=$this->basePath()?>/vfjs?unavailableSelections=" type="text/javascript" language="javascript"></script>
+<script src="<?=$this->basePath()?>/multiTree.js" type="text/javascript" language="javascript"></script>
 <script src="<?=$this->basePath()?>/js/jquery.metadata.pack.js" type="text/javascript" language="javascript"></script>
-<link rel="stylesheet" type="text/css" href="/skin/adminhtml/default/default/vf/multiTree.css" />
+<link rel="stylesheet" type="text/css" href="<?=$this->basePath()?>/multiTree.css" />
 <!-- end VAF -->
