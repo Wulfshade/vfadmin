@@ -1,0 +1,18 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+<head>
+    <?=$this->partial('layout/head.phtml')?>
+</head>
+<body>
+
+<div class="container">
+
+    <?=$this->partial('layout/messages.phtml')?>
+    <?php echo $this->content; ?>
+    <?=$this->partial('layout/footer.phtml')?>
+</div>
+
+<?php echo $this->inlineScript() ?>
+</body>
+</html>

@@ -9,6 +9,10 @@
                 <li <?=$module == 'Fitments' ? 'class="active"' : ''?>><a href="<?php echo $this->url('fitments') ?>"><?php echo $this->translate('Product Fitments') ?></a></li>
                 <li <?=$module == 'Settings' ? 'class="active"' : ''?>><a href="<?php echo $this->url('settings') ?>"><?php echo $this->translate('Settings') ?></a></li>
             </ul>
+
+            <ul class="nav pull-right">
+                <li><a href="<?php echo $this->url('logout') ?>">Log Out</a></li>
+            </ul>
         </div>
 
     </div>

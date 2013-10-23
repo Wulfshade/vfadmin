@@ -2,9 +2,21 @@
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Stdlib\RequestInterface as Request;
+use Zend\Stdlib\ResponseInterface as Response;
 
 class AbstractController extends AbstractActionController
 {
+    protected $thisControllerRequiresLoginToView = true;
+
+    function dispatch(Request $request, Response $response = null)
+    {
+        if($this->thisControllerRequiresLoginToView && !isset($_SESSION['logged_in'])) {
+            return $this->redirect()->toRoute('login');
+        }
+        return parent::dispatch($request, $response);
+    }
+
     function attemptedFileUpload()
     {
         return (bool)$_FILES['file']['name'];

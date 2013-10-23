@@ -11,17 +11,38 @@ namespace Application\Controller;
 
 class LoginController extends AbstractController
 {
+    protected $thisControllerRequiresLoginToView = false;
+
     function indexAction()
     {
+        // give them a stripped down layout w/ nothing but the login form
+        $this->layout()->setTemplate('layout/layout-login.phtml');
+
+        // if already logged in, don't let them see the login form.
+        if(isset($_SESSION['logged_in'])) {
+            return $this->redirect()->toRoute('dashboard');
+        }
+
+        // validate what they entered
         if($this->getRequest()->isPost()) {
             $username_entered = $this->params()->fromPost('username');
             $password_entered = $this->params()->fromPost('password');
             if($this->isValid($username_entered, $password_entered)) {
-                echo 'valid';exit;
+                // set a flag logging them in, and send them to their dashboard
+                $_SESSION['logged_in'] = 1;
+                $this->flashMessenger()->addSuccessMessage('Welcome, ' . $username_entered);
+                return $this->redirect()->toRoute('dashboard');
             } else {
-                echo 'invalid';exit;
+                // flash a message explaining they typed the username or password wrong
+                $this->flashMessenger()->addErrorMessage('Those credentials weren\'t valid.');
             }
         }
+    }
+
+    function logoutAction()
+    {
+        unset($_SESSION['logged_in']);
+        return $this->redirect()->toRoute('login');
     }
 
     /**
