@@ -1,5 +1,5 @@
 <form action="?" method="post">
-    <input type="submit" />
+    <input type="submit" class="btn btn-primary pull-right" value="Save" />
     <div class="entry-edit">
         <div class="entry-edit-head">
             <h4>Fitment Settings</h4>
@@ -66,14 +66,14 @@
                             Quick Add:
                             <br />
                             <input type="text" class="vafQuickAdd vafQuickAdd_<?=$level?> {level:'<?=$level?>'}" name="vafQuickAdd_<?=$level?>" />
-                            <input type="button" class="vafQuickAddSubmit vafQuickAddSubmit_<?=$level?> {level:'<?=$level?>'}" name="vafQuickAddSubmit_<?=$level?>" value="+" />
+                            <input type="button" class="btn btn-success btn-mini vafQuickAddSubmit vafQuickAddSubmit_<?=$level?> {level:'<?=$level?>'}" name="vafQuickAddSubmit_<?=$level?>" value="+" />
                             <br />
                             <span class="multiTree-levelName" style="display:none;"><?=$level?></span>
                         </div>
                         <?php
                     }
                     ?>
-                    <input class="multiTree-Add" type="button" value="Add +" />
+                    <input class="btn btn-success multiTree-Add" type="button" value="Add +" />
                     <br  clear="all" />
                     <input type="checkbox" class="vafCheckAll" />  Select All
                     <br />
@@ -87,7 +87,7 @@
                         <div class="multiTree-selection">
                             <input type="checkbox" name="vafcheck[]" class="vafcheck" value="<?=$leafLevel?>-<?=$fit->id?>" />
                             <div class="multiTree-value" style="display:none"><?=$leafLevel?>-<?=$fit->id?></div>
-                            <a class="multiTree-closeLink" href="#">[ x ]</a>
+                            <input type="button" class="btn btn-danger btn-mini multiTree-closeLink" value="X" />
                             <?php
                             $label = array();
                             $schema = new VF_Schema();
@@ -112,6 +112,7 @@
         </div>
 
     </div>
+    <input type="submit" class="btn btn-primary pull-right" value="Save" />
 </form>
 
 <!-- start VAF -->

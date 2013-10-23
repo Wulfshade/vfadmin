@@ -48,3 +48,9 @@
 {
     float:right;
 }
+.vafQuickAdd[type="text"] {
+    width:130px;
+    height: 14px;
+    font-size: 10px;
+    line-height: 14px;
+}
