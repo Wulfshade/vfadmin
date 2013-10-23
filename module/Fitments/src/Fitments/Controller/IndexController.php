@@ -10,14 +10,37 @@
 namespace Fitments\Controller;
 
 use Application\Controller\AbstractController;
+use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractController
 {
     function indexAction()
     {
+        $sku = $this->params()->fromQuery('sku');
+        $results = $this->findProductsSkuLike($sku);
+
+        return array(
+            'sku' => $sku,
+            'results' => $results
+        );
+    }
+
+    function findProductsSkuLike($sku, $limit=10)
+    {
+        $result = $this->db()->select()
+            ->from('catalog_product_entity', array('id' => 'entity_id', 'sku'))
+            ->where('sku LIKE ?', '%' . $sku . '%')
+            ->limit($limit)
+            ->query()
+            ->fetchAll();
+        return $result;
+    }
+
+    function productmanageAction()
+    {
         $schema = new \VF_Schema;
         $product = new \VF_Product();
-        $product->setId(1);
+        $product->setId($this->params()->fromQuery('id'));
 
         if($this->getRequest()->isPost()) {
             $this->removeFitments($product);
@@ -26,11 +49,13 @@ class IndexController extends AbstractController
             $this->addNewFitments($product);
         }
 
-        return array(
+        $view = new ViewModel(array(
             'fitments' => $product->getFits(),
             'product' => $product,
             'schema' => $schema->getLevels()
-        );
+        ));
+        $view->setTemplate('fitments/index/multitree.phtml');
+        return $view;
     }
 
     function removeFitments($product)

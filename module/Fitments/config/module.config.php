@@ -22,6 +22,17 @@ return array(
                 ),
             ),
 
+            'productmanage' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route'    => '/productmanage/:id',
+                    'defaults' => array(
+                        'controller' => 'Fitments\Controller\Index',
+                        'action'     => 'productmanage',
+                    ),
+                ),
+            ),
+
             'fitments-import' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
