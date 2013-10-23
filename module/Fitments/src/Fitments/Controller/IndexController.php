@@ -19,6 +19,10 @@ class IndexController extends AbstractController
         $sku = $this->params()->fromQuery('sku');
         $results = $this->findProductsSkuLike($sku);
 
+        if(strlen($sku) > 0 && 0 == count($results)) {
+            $this->flashMessenger()->addInfoMessage('No products are found that match that SKU');
+        }
+
         return array(
             'sku' => $sku,
             'results' => $results
@@ -40,13 +44,15 @@ class IndexController extends AbstractController
     {
         $schema = new \VF_Schema;
         $product = new \VF_Product();
-        $product->setId($this->params()->fromQuery('id'));
+
+        $product->setId($this->params()->fromRoute('id'));
 
         if($this->getRequest()->isPost()) {
             $this->removeFitments($product);
             $this->updateUniversal($product);
             //$this->updateRelated($product);
             $this->addNewFitments($product);
+            $this->flashMessenger()->addSuccessMessage('Produt\'s fitments saved');
         }
 
         $view = new ViewModel(array(

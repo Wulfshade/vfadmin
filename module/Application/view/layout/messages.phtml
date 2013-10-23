@@ -15,6 +15,19 @@ if ($flashMessenger->hasMessages()) {
 <?php
 }
 
+$flashMessenger->setNamespace('info');
+if ($flashMessenger->hasMessages()) {
+    ?>
+    <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <i class="icon-exclamation-sign"></i>
+        <?php foreach ($flashMessenger->getMessages() as $msg): ?>
+            <?php echo $msg ?>
+        <?php endforeach; ?>
+    </div>
+<?php
+}
+
 $flashMessenger->setNamespace('error');
 if ($flashMessenger->hasMessages()) {
     ?>
