@@ -37,6 +37,10 @@ class LoginController extends AbstractController
                 $this->flashMessenger()->addErrorMessage('Those credentials weren\'t valid.');
             }
         }
+
+        return(array(
+            'username_entered' => $username_entered,
+        ));
     }
 
     function logoutAction()
