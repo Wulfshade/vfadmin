@@ -31,9 +31,33 @@ class IndexController extends AbstractController
 
     function findProductsSkuLike($sku, $limit=10)
     {
+        $whichCart = $this->shoppingCartEnvironment()->whichShoppingCart();
+        switch($whichCart) {
+            case 'magento':
+                return $this->findProductsSkuLike_magento($sku, $limit);
+            case 'prestashop':
+                return $this->findProductsSkuLike_prestashop($sku, $limit);
+            default:
+                throw new Exception('Unknown shopping cart ' . $whichCart);
+        }
+    }
+
+    function findProductsSkuLike_magento($sku, $limit=10)
+    {
         $result = $this->db()->select()
             ->from('catalog_product_entity', array('id' => 'entity_id', 'sku'))
             ->where('sku LIKE ?', '%' . $sku . '%')
+            ->limit($limit)
+            ->query()
+            ->fetchAll();
+        return $result;
+    }
+
+    function findProductsSkuLike_prestashop($sku, $limit=10)
+    {
+        $result = $this->db()->select()
+            ->from('ps_product', array('id' => 'id_product', 'sku' => 'reference'))
+            ->where('reference LIKE ?', '%' . $sku . '%')
             ->limit($limit)
             ->query()
             ->fetchAll();
