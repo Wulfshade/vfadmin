@@ -39,7 +39,7 @@ class LoginController extends AbstractController
         }
 
         return(array(
-            'username_entered' => $username_entered,
+            'username_entered' => $this->params()->fromPost('username'),
         ));
     }
 
