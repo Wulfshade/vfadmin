@@ -13,14 +13,20 @@ echo $this->doctype();
         <?=$this->partial('layout/head.phtml')?>
     </head>
     <body>
-        <?=$this->partial('layout/navbar.phtml')?>
+        <?=$this->partial('layout/navbar.phtml', array(
+            'route' => $route,
+            'module' => $module,
+        ))?>
 
         <div class="container">
 
             <?=$this->partial('layout/messages.phtml')?>
             <div class="row">
                 <div class="span2">
-                    <?=$this->partial('layout/sidebar.phtml')?>
+                    <?=$this->partial('layout/sidebar.phtml', array(
+                        'route' => $route,
+                        'module' => $module,
+                    ))?>
                 </div>
                 <div class="span10">
                     <?php echo $this->content; ?>
