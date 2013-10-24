@@ -17,7 +17,7 @@
     <div class="span6">
         <dl class="dashboard-cell">
             <dt>Shopping Cart Environment</dt>
-            <dd><?=$this->escapeHTML($shoppingCartName)?></dd>
+            <dd><?=$this->escapeHTML($shoppingCartName ? $shoppinCartName : 'n/a')?></dd>
         </dl>
     </div>
     <div class="span6">

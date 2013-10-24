@@ -16,7 +16,12 @@ class SchemaController extends AbstractActionController
 {
     public function indexAction()
     {
-        $schema = new \VF_Schema;
+        try {
+            $schema = new \VF_Schema;
+            $levels = $schema->getLevels();
+        } catch( \Zend_Db_Statement_Exception $e ) {
+            $levels = array();
+        }
 
         if($this->getRequest()->isPost()) {
             $schemaGenerator = new \VF_Schema_Generator();
@@ -29,7 +34,7 @@ class SchemaController extends AbstractActionController
         }
 
         return array(
-            'schema' => $schema->getLevels()
+            'schema' => $levels
         );
     }
 }

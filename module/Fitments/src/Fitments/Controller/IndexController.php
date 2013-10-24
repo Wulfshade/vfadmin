@@ -38,7 +38,7 @@ class IndexController extends AbstractController
             case 'prestashop':
                 return $this->findProductsSkuLike_prestashop($sku, $limit);
             default:
-                throw new Exception('Unknown shopping cart ' . $whichCart);
+                throw new \Exception('Unknown shopping cart ' . $whichCart);
         }
     }
 

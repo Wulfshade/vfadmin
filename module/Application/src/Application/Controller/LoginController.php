@@ -15,6 +15,8 @@ class LoginController extends AbstractController
 
     function indexAction()
     {
+        $whichCart = $this->shoppingCartEnvironment()->whichShoppingCart();
+
         // give them a stripped down layout w/ nothing but the login form
         $this->layout()->setTemplate('layout/layout-login.phtml');
 
@@ -65,6 +67,9 @@ class LoginController extends AbstractController
             case 'prestashop':
                 return $this->isValidPrestashop($username_entered, $password_entered);
             break;
+            case null:
+                // if running stand-alone, just log them in [for now, until I change this later]
+                return true;
             default:
                 throw new \Exception($whichCart . ' is not recognized as a cart.');
         }

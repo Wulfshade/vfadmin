@@ -16,13 +16,22 @@ return array(
         'factories' => array(
             'database' => function ($serviceManager) {
                 $shoppingCartEnvironment = $serviceManager->get('shopping_cart_adapter');
-                $dbinfo = $shoppingCartEnvironment->databaseDetails();
-                $database = new \VF_TestDbAdapter(array(
-                    'dbname' => $dbinfo['dbname'],
-                    'username' => $dbinfo['username'],
-                    'password' => $dbinfo['password']
-                ));
-                return $database;
+                if(false === $shoppingCartEnvironment->whichShoppingCart()) {
+                    $database = new \VF_TestDbAdapter(array(
+                        'dbname' => 'vfcore',
+                        'username' => 'root',
+                        'password' => ''
+                    ));
+                    return $database;
+                } else {
+                    $dbinfo = $shoppingCartEnvironment->databaseDetails();
+                    $database = new \VF_TestDbAdapter(array(
+                        'dbname' => $dbinfo['dbname'],
+                        'username' => $dbinfo['username'],
+                        'password' => $dbinfo['password']
+                    ));
+                    return $database;
+                }
             },
             'shopping_cart_adapter' => function($serviceManager) {
                 $shoppingCartEnvironment = new \Application\ShoppingCartAdapter();

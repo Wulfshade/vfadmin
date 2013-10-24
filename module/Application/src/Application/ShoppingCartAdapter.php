@@ -39,6 +39,9 @@ class ShoppingCartAdapter
     public function whichShoppingCart()
     {
         $shoppingCartRoot = $this->shoppingCartRoot();
+        if(is_null($shoppingCartRoot)) {
+            return false;
+        }
 
         $indexCode = file_get_contents($shoppingCartRoot.'index.php');
 
