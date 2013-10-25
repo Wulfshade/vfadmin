@@ -13,7 +13,10 @@ echo $this->doctype();
     <?=$this->partial('layout/head.phtml')?>
 </head>
 <body>
-<?=$this->partial('layout/navbar.phtml')?>
+<?=$this->partial('layout/navbar.phtml', array(
+    'route' => $route,
+    'module' => $module,
+))?>
 
 <div class="container">
 
