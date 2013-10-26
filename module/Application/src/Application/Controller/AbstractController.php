@@ -95,4 +95,14 @@ class AbstractController extends AbstractActionController
     {
         return $this->getServiceLocator()->get('database');
     }
+
+    function baseURL()
+    {
+        $uri = $this->getRequest()->getUri();
+
+        $scheme = $uri->getScheme();
+        $host = $uri->getHost();
+        $base = sprintf('%s://%s', $scheme, $host);
+        return $base;
+    }
 }

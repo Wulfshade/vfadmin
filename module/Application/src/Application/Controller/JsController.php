@@ -11,9 +11,13 @@ namespace Application\Controller;
 
 class JsController extends AbstractController
 {
+    protected $thisControllerRequiresLoginToView = false;
+
     function jsAction()
     {
-        \VF_Singleton::getInstance()->setProcessURL('/vfprocess?');
+        header('Access-Control-Allow-Origin: *');
+        $processURL = $this->baseURL() . $this->url()->fromRoute('process') . '?';
+        \VF_Singleton::getInstance()->setProcessURL($processURL);
         header('Content-Type:application/x-javascript');
         echo 'jQuery.noConflict();';
         require_once 'VF/html/vafAjax.js.include.php';
@@ -22,6 +26,7 @@ class JsController extends AbstractController
 
     function processAction()
     {
+        header('Access-Control-Allow-Origin: *');
         require_once 'VF/html/vafAjax.include.php';
         exit;
     }
