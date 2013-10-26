@@ -1,4 +1,6 @@
 <?php
+ini_set('date.timezone', 'America/New_York');
+
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.
