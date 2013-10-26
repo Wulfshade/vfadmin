@@ -15,7 +15,7 @@ class ImportController extends AbstractController
 {
     function indexAction()
     {
-        $schema = new \VF_Schema;
+        $schema = $this->schema();
 
         if($this->getRequest()->isPost()) {
 

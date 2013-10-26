@@ -37,10 +37,6 @@ class Module
         define( 'ELITE_CONFIG_DEFAULT', dirname(__FILE__).'/config.default.ini' );
         define( 'ELITE_CONFIG', dirname(__FILE__).'/config.ini' );
         define( 'ELITE_PATH', '.' );
-
-        $database = $sm->get('database');
-
-        \VF_Singleton::getInstance()->setReadAdapter($database);
     }
 
     public function getConfig()
@@ -85,6 +81,15 @@ class Module
                 'shopping_cart_adapter' => function($serviceManager) {
                     $shoppingCartEnvironment = new \Application\ShoppingCartAdapter();
                     return new $shoppingCartEnvironment;
+                },
+                'vfsingleton' => function($sm) {
+                    \VF_Singleton::getInstance()->setReadAdapter($sm->get('database'));
+                    return \VF_Singleton::getInstance();
+                },
+                'vfschema' => function($sm) {
+                    $sm->get('vfsingleton');
+                    $schema = new \VF_Schema;
+                    return $schema;
                 }
             )
         );

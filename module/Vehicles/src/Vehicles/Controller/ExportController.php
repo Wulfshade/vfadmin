@@ -15,7 +15,7 @@ class ExportController extends AbstractController
 {
     function indexAction()
     {
-        $schema = new \VF_Schema;
+        $schema = $this->schema();
 
         if (isset($_GET['go']))
         {

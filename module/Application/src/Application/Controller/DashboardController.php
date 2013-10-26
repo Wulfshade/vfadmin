@@ -15,7 +15,7 @@ class DashboardController extends AbstractController
     {
         $this->layout('layout/layout-dashboard.phtml');
 
-        $schema = new \VF_Schema;
+        $schema = $this->getServiceLocator()->get('vfschema');
         $vehicleCount = $this->finder()->countAll();
 
         return array(

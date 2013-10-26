@@ -16,6 +16,9 @@ class AbstractController extends AbstractActionController
             return parent::dispatch($request, $response);
         }
 
+        // ensure the singleton is loaded & seeded with DB for code that depends on it
+        $this->getServiceLocator()->get('vfsingleton');
+
         if($this->thisControllerRequiresLoginToView && !isset($_SESSION['logged_in'])) {
             return $this->redirect()->toRoute('login');
         }
@@ -86,7 +89,7 @@ class AbstractController extends AbstractActionController
 
     function schema()
     {
-        $schema = new \VF_Schema;
+        $schema = $this->getServiceLocator()->get('vfschema');
         return $schema;
     }
 

@@ -9,10 +9,10 @@
 
 namespace Settings\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Application\Controller\AbstractController;
 use Zend\View\Model\ViewModel;
 
-class SchemaController extends AbstractActionController
+class SchemaController extends AbstractController
 {
     public function indexAction()
     {
