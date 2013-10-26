@@ -13,7 +13,7 @@ class JsController extends AbstractController
 {
     function jsAction()
     {
-        \VF_Singleton::getInstance()->setProcessURL($this->url()->fromRoute('process'));
+        \VF_Singleton::getInstance()->setProcessURL('/vfprocess?');
         header('Content-Type:application/x-javascript');
         echo 'jQuery.noConflict();';
         require_once 'VF/html/vafAjax.js.include.php';
