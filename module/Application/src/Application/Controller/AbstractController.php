@@ -4,6 +4,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;
+use Zend\Console\Request as ConsoleRequest;
 
 class AbstractController extends AbstractActionController
 {
@@ -11,9 +12,14 @@ class AbstractController extends AbstractActionController
 
     function dispatch(Request $request, Response $response = null)
     {
+        if(php_sapi_name() == 'cli') {
+            return parent::dispatch($request, $response);
+        }
+
         if($this->thisControllerRequiresLoginToView && !isset($_SESSION['logged_in'])) {
             return $this->redirect()->toRoute('login');
         }
+
         return parent::dispatch($request, $response);
     }
 
