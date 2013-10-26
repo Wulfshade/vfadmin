@@ -14,7 +14,7 @@ $config = array(
         ),
 
         'config_glob_paths' => array(
-            'config/autoload/{,*.}{global,local}.php',
+            //'config/autoload/{,*.}{global,local}.php',
         ),
     ),
 );
