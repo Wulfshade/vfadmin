@@ -2,6 +2,9 @@
 if(!isset($route)) {
     $route = null;
 }
+if(!isset($controller)) {
+    $controller = null;
+}
 if(!isset($module)) {
     $module = null;
 }
@@ -25,6 +28,7 @@ echo $this->doctype();
                 <div class="span2">
                     <?=$this->partial('layout/sidebar.phtml', array(
                         'route' => $route,
+                        'controller' => $controller,
                         'module' => $module,
                     ))?>
                 </div>
